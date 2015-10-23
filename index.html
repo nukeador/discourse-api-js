@@ -1,0 +1,74 @@
+<html>
+    <head>
+        <title>Discourse topics as a blog</title>
+        <link rel="stylesheet" type="text/css" media="screen" href="https://ffp4g1ylyit3jdyti1hqcvtb-wpengine.netdna-ssl.com/wp-content/themes/OneMozilla/style.css">
+        <script>
+            // Edit to set discourse URL and category to fetch
+            var baseURL = 'https://discourse.mozilla-community.org';
+            var category = 'mozillians';
+            
+            // We fetch latest posts and then each post content async
+            function reqListener () {
+                document.getElementById('cat-name').innerHTML = category;
+                
+                var topics = JSON.parse(this.responseText);
+                
+                var topicNum = topics.topic_list.topics.length;
+                
+                for (var i = 0; i < topicNum; i++) {
+                    var topic = topics.topic_list.topics[i];
+                    var topicURL = baseURL + '/t/' + topic["slug"] + '/' + topic["id"];
+                    
+                    document.getElementById('content-main').innerHTML += '<article id="' + topic["id"] + '"><header><h2><a href="' + topicURL + ' ">' + topic["title"] + '</a></h2></header>';
+
+                    
+                    function topListener () {
+                        var topicObj = JSON.parse(this.responseText);
+                        var topic = topicObj.post_stream;
+                        
+                        // Fix to get the right URL
+                        var topic_avatar_template = baseURL + topic.posts[0].avatar_template;
+                        var avatar_template = topic_avatar_template.replace("{size}", "45");
+                        var usernameURL = baseURL + '/users/' + topic.posts[0].username;
+                    
+                        document.getElementById(topicObj.id).innerHTML += '<div class="entry-content"><address class="vcard"><cite class="author fn"><a href="' + usernameURL + '"><img src="' + avatar_template +'" />' + topic.posts[0].name + '</a></cite></address>' + topic.posts[0].cooked + '</div></article>';
+                    }
+                    
+                    var oTop = new XMLHttpRequest();
+                    oTop.addEventListener("load", topListener);
+                    oTop.open("GET", topicURL + '.json');
+                    oTop.send();
+                }
+            }
+              
+            var oReq = new XMLHttpRequest();
+            oReq.addEventListener("load", reqListener);
+            oReq.open("GET", baseURL + '/c/' + category + '/l/latest.json');
+            oReq.send();
+        </script>
+    </head>
+    
+    <body>
+        <div id="page"><div class="wrap">
+        
+            <header id="masthead">
+                <hgroup>
+                    <h1><span id="cat-name"></span> discourse topics</h1>
+                    <h2>as a blogsite</h2>
+                </hgroup>
+            </header>
+        
+            <main id="content">
+    
+                <div id="content-main" class="main" role="main"></div>
+                
+                <div id="content-sub" class="sub sidebar widgets" role="complementary">
+                    <aside id="text-3" class="widget widget_text"><h3 class="widget-title">About This site</h3>		            <div class="textwidget">This site fetch topics on a discourse category and present them as a blog.</div>
+                    </aside>
+              </div>
+            
+            </main>
+        
+        </div></div>
+    </body>
+</html>
