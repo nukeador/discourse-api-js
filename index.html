@@ -97,6 +97,9 @@
                     oTop.open("GET", topicURL + '.json');
                     oTop.send();
                 }
+                
+                // Final footer
+                document.getElementById('content-main').innerHTML += '<nav class="nav-paging"><ul><li class="prev"><a href="' + baseURL + '/' +  category + '">All posts</a></li> </ul></nav>';
             }
               
             var oReq = new XMLHttpRequest();
@@ -121,8 +124,11 @@
     
                 <div id="content-main" class="main" role="main"></div>
                 
+                
+                
                 <div id="content-sub" class="sub sidebar widgets" role="complementary">
-                    <aside id="text-3" class="widget widget_text"><h3 class="widget-title">About This site</h3>		            <div class="textwidget">This site fetch topics on a discourse category and present them as a blog.</div>
+                    <aside id="text-3" class="widget widget_text">
+                        <h3 class="widget-title">About This site</h3>		             <div class="textwidget">This site fetch topics on a discourse category and present them as a blog.</div>
                     </aside>
               </div>
             
