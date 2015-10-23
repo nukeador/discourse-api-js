@@ -47,6 +47,7 @@
                     function topListener () {
                         var topicObj = JSON.parse(this.responseText);
                         var topic = topicObj.post_stream;
+                        var topicURL = baseURL + '/t/' + topicObj.slug + '/' + topicObj.id;
                         
                         // Day, month and year
                         var date = Date.parse(topicObj.created_at);
@@ -69,7 +70,7 @@
                         var day = date.getUTCDate();
                         var year = date.getUTCFullYear();
                         
-                        // Fix to get the right URL
+                        // Fix to get the right avatar URL
                         var topic_avatar_template = baseURL + topic.posts[0].avatar_template;
                         var avatar_template = topic_avatar_template.replace("{size}", "45");
                         var usernameURL = baseURL + '/users/' + topic.posts[0].username;
