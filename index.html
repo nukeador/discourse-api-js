@@ -2,6 +2,27 @@
     <head>
         <title>Discourse topics as a blog</title>
         <link rel="stylesheet" type="text/css" media="screen" href="https://ffp4g1ylyit3jdyti1hqcvtb-wpengine.netdna-ssl.com/wp-content/themes/OneMozilla/style.css">
+            <link rel="stylesheet" type="text/css" media="screen" href="https://ffp4g1ylyit3jdyti1hqcvtb-wpengine.netdna-ssl.com/wp-content/themes/OneMozilla/colors/stone/stone.css">
+        <style>
+            .entry-meta {
+                overflow: hidden;
+            }
+            .footer-box {
+                float: left;
+                margin-right: 2em;
+                text-align: center;
+                font-size: 1.2em;
+                font-weight: bold;
+            }
+            .footer-box span {
+                color: #919191;
+                font-weight: normal;
+            }
+            .footer-box span.likes {
+                color: rgb(225, 150, 161);
+            }
+            
+        </style>
         <script>
             // Edit to set discourse URL and category to fetch
             var baseURL = 'https://discourse.mozilla-community.org';
@@ -19,19 +40,53 @@
                     var topic = topics.topic_list.topics[i];
                     var topicURL = baseURL + '/t/' + topic["slug"] + '/' + topic["id"];
                     
-                    document.getElementById('content-main').innerHTML += '<article id="' + topic["id"] + '"><header><h2><a href="' + topicURL + ' ">' + topic["title"] + '</a></h2></header>';
+                    // Adding post wrapper
+                    document.getElementById('content-main').innerHTML += '<article id="' + topic["id"] + '" class="post"><header class="entry-header"><h2 class="entry-title"><a href="' + topicURL + ' ">' + topic["title"] + '</a></h2></header>';
 
                     
                     function topListener () {
                         var topicObj = JSON.parse(this.responseText);
                         var topic = topicObj.post_stream;
                         
+                        // Day, month and year
+                        var date = Date.parse(topicObj.created_at);
+                        var date = new Date(date);
+                        var months = new Array(12);
+                        months[0] = "Jan";
+                        months[1] = "Feb";
+                        months[2] = "Mar";
+                        months[3] = "Apr";
+                        months[4] = "May";
+                        months[5] = "Jun";
+                        months[6] = "Jul";
+                        months[7] = "Aug";
+                        months[8] = "Sep";
+                        months[9] = "Oct";
+                        months[10] = "Nov";
+                        months[11] = "Dec";
+                        
+                        var month = months[date.getUTCMonth()];
+                        var day = date.getUTCDate();
+                        var year = date.getUTCFullYear();
+                        
                         // Fix to get the right URL
                         var topic_avatar_template = baseURL + topic.posts[0].avatar_template;
                         var avatar_template = topic_avatar_template.replace("{size}", "45");
                         var usernameURL = baseURL + '/users/' + topic.posts[0].username;
-                    
-                        document.getElementById(topicObj.id).innerHTML += '<div class="entry-content"><address class="vcard"><cite class="author fn"><a href="' + usernameURL + '"><img src="' + avatar_template +'" />' + topic.posts[0].name + '</a></cite></address>' + topic.posts[0].cooked + '</div></article>';
+                        
+                        // Adding user info
+                        
+                        // We use username by default unless there is a full name
+                        name = topic.posts[0].username;
+                        if (topic.posts[0].name) {
+                            name = topic.posts[0].name;
+                        }
+                        
+                        document.getElementById(topicObj.id).firstChild.innerHTML += '<p class="entry-posted"><time class="published" title="' + topicObj.created_at + '" datetime="' + topicObj.created_at + '"><a class="posted-month">' + month + '</a><span class="posted-date">' + day +'</span><a class="posted-year">' + year + '</a></time></p><address class="vcard"><cite class="author fn"><a class="url" href="' + usernameURL + '"><img class="avatar avatar-24 photo" width="26" height="26" src="' + avatar_template +'" alt="" />' + name + '</a></cite></address>';
+                        // Adding post content
+                        document.getElementById(topicObj.id).innerHTML += '<div class="entry-content">' + topic.posts[0].cooked + '</div>';
+                        // Post footer
+                        document.getElementById(topicObj.id).innerHTML += '<footer class="entry-meta"><div class="meta"><div class="footer-box"><a href="' + topicURL + '">' + topicObj.posts_count + '<br /><span>replies</span></a></div><div class="footer-box">' + topicObj.views + '<br /><span>views</span></div><div class="footer-box">' + topicObj.like_count + '<br /><span class="likes">likes</span></div></div></footer></article>';
                     }
                     
                     var oTop = new XMLHttpRequest();
