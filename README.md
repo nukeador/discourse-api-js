@@ -20,9 +20,10 @@ Then create an empty file ``js/discourse-custom.js`` with the basic info:
 
 	client.category(category, function(response) {
         // We need to wait until the remote response is back
-        if (response) {
-	      // Your code here  
-        }
+            if (response) {
+                  // Your code here  
+            }
+        });
 The ``response`` variable will include the category object with all information such as:
 
 	response.topic_list.topics.length // Number of topics retrieved
@@ -30,6 +31,9 @@ The ``response`` variable will include the category object with all information 
 	response.topic_list.topics[0].slug
 	response.topic_list.topics[0].id
 	response.topic_list.topics[0].title
+        response.topic_list.topics[0].created_at
+        response.topic_list.topics[0].views
+        response.topic_list.topics[0].like_count
 
 ##### Get a specific topic
 
@@ -38,13 +42,15 @@ The ``response`` variable will include the category object with all information 
 
 	client.topic(topic, function(response) {
         // We need to wait until the remote response is back
-        if (response) {
-	      // Your code here  
-        }
+            if (response) {
+                  // Your code here  
+            }
+        });
 
 The ``response`` variable will include the topic object with all information such as:
 
-	response.slug
+	response.title
+        response.slug
 	response.id
 	response.posts_count // Number of messages, including the first one
 	response.created_at
@@ -56,5 +62,4 @@ The ``response`` variable will include the topic object with all information suc
 	response.post_stream.posts[0].avatar_template
 	response.post_stream.posts[0].cooked // Message content in HTML
 	
-
-
+Check [example.html](https://github.com/nukeador/discourse-blog/blob/master/example.html) and [js/discourse-custom.js](https://github.com/nukeador/discourse-blog/blob/master/js/discourse-custom.js) for a full example.
