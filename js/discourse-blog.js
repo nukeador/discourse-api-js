@@ -65,13 +65,16 @@ function discourseBlog () {
                         }
                         
                         // Adding user info
+                        
                         document.getElementById(topic.id).firstChild.innerHTML += '<p class="entry-posted"><time class="published" title="' + topic.created_at + '" datetime="' + topic.created_at + '"><a class="posted-month">' + month + '</a><span class="posted-date">' + day +'</span><a class="posted-year">' + year + '</a></time></p><address class="vcard"><cite class="author fn"><a class="url" href="' + usernameURL + '"><img class="avatar avatar-24 photo" width="26" height="26" src="' + avatar_template +'" alt="" />' + name + '</a></cite></address>';
                         
                         // Adding post content
-                        document.getElementById(topic.id).innerHTML += '<div class="entry-content">' + topic.post_stream.posts[0].cooked + '</div>';
+                        var postContent = '<div class="entry-content">' + topic.post_stream.posts[0].cooked + '</div>';
                         
-                        // Post footer
-                        document.getElementById(topic.id).innerHTML += '<footer class="entry-meta"><div class="meta"><div class="footer-box"><a href="' + topicURL + '/2">' + replies + '<br /><span>replies</span></a></div><div class="footer-box">' + topic.views + '<br /><span>views</span></div><div class="footer-box">' + topic.like_count + '<br /><span class="likes">likes</span></div></div></footer></article>';
+                        // Post footer;
+                        postContent += '<footer class="entry-meta"><div class="meta"><div class="footer-box"><a href="' + topicURL + '/2">' + replies + '<br /><span>replies</span></a></div><div class="footer-box">' + topic.views + '<br /><span>views</span></div><div class="footer-box">' + topic.like_count + '<br /><span class="likes">likes</span></div></div></footer></article>';
+                        
+                        document.getElementById(topic.id).innerHTML += postContent;
                     }
                 });
             };
