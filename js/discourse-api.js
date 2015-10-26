@@ -8,7 +8,6 @@ DiscourseApi.prototype.category = function (id, cb) {
     object.open("GET", this.url + '/c/' + id + '.json');
     object.onreadystatechange = function() {
         if (XMLHttpRequest.DONE != object.readyState) {
-            object.category = JSON.parse(object.responseText);
             cb(JSON.parse(object.responseText));
         }
     };
@@ -20,7 +19,6 @@ DiscourseApi.prototype.topic = function (id, cb) {
     object.open("GET", this.url + '/t/' + id + '.json');
     object.onreadystatechange = function() {
         if (XMLHttpRequest.DONE != object.readyState) {
-            object.topic = JSON.parse(object.responseText);
             cb(JSON.parse(object.responseText));
         }
     };
