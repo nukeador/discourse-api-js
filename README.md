@@ -65,3 +65,6 @@ The ``response`` variable will include the topic object with all information suc
 Check [example.html](https://github.com/nukeador/discourse-blog/blob/master/example.html) and [js/discourse-custom.js](https://github.com/nukeador/discourse-blog/blob/master/js/discourse-custom.js) for a simple example.
 
 There is an advanced example in [index.html](https://github.com/nukeador/discourse-blog/blob/master/index.html) and [js/discourse-blog.js](https://github.com/nukeador/discourse-blog/blob/master/js/discourse-blog.js) on how to present all topics in a category and their content as a blog.
+
+* [Live example of discourse-example](http://www.nukeador.com/discourse-blog/example.html)
+* [Live example of discourse-blog](http://www.nukeador.com/discourse-blog/index.html)
