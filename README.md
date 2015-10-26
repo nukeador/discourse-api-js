@@ -62,4 +62,6 @@ The ``response`` variable will include the topic object with all information suc
 	response.post_stream.posts[0].avatar_template
 	response.post_stream.posts[0].cooked // Message content in HTML
 	
-Check [example.html](https://github.com/nukeador/discourse-blog/blob/master/example.html) and [js/discourse-custom.js](https://github.com/nukeador/discourse-blog/blob/master/js/discourse-custom.js) for a full example.
+Check [example.html](https://github.com/nukeador/discourse-blog/blob/master/example.html) and [js/discourse-custom.js](https://github.com/nukeador/discourse-blog/blob/master/js/discourse-custom.js) for a simple example.
+
+There is an advanced example in [index.html](https://github.com/nukeador/discourse-blog/blob/master/index.html) and [js/discourse-blog.js](https://github.com/nukeador/discourse-blog/blob/master/js/discourse-blog.js) on how to present all topics in a category and their content as a blog.
