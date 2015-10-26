@@ -1,0 +1,17 @@
+.entry-meta {
+    overflow: hidden;
+}
+.footer-box {
+    float: left;
+    margin-right: 2em;
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+.footer-box span {
+    color: #919191;
+    font-weight: normal;
+}
+.footer-box span.likes {
+    color: rgb(225, 150, 161);
+}
