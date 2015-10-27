@@ -4,8 +4,8 @@
 
 Add the library and your custom code before your ``</body>``:
 
-    <script src="js/discourse-api.js"></script>
-    <script src="js/discourse-custom.js"></script>
+	<script src="js/discourse-api.js"></script>
+	<script src="js/discourse-custom.js"></script>
 
 Then create an empty file ``js/discourse-custom.js`` with the basic info:
 
@@ -19,11 +19,12 @@ Then create an empty file ``js/discourse-custom.js`` with the basic info:
 	var category = 'mozillians';
 
 	client.category(category, function(response) {
-        // We need to wait until the remote response is back
-            if (response) {
-                  // Your code here  
-            }
-        });
+	// We need to wait until the remote response is back
+		if (response) {
+			// Your code here  
+		}
+	});
+
 The ``response`` variable will include the category object with all information such as:
 
 	response.topic_list.topics.length // Number of topics retrieved
@@ -31,9 +32,9 @@ The ``response`` variable will include the category object with all information 
 	response.topic_list.topics[0].slug
 	response.topic_list.topics[0].id
 	response.topic_list.topics[0].title
-        response.topic_list.topics[0].created_at
-        response.topic_list.topics[0].views
-        response.topic_list.topics[0].like_count
+	response.topic_list.topics[0].created_at
+	response.topic_list.topics[0].views
+	response.topic_list.topics[0].like_count
 
 ##### Get a specific topic
 
@@ -41,16 +42,16 @@ The ``response`` variable will include the category object with all information 
 	var topic = '56';
 
 	client.topic(topic, function(response) {
-        // We need to wait until the remote response is back
-            if (response) {
-                  // Your code here  
-            }
-        });
+		// We need to wait until the remote response is back
+		if (response) {
+			// Your code here  
+		}
+	});
 
 The ``response`` variable will include the topic object with all information such as:
 
 	response.title
-        response.slug
+	response.slug
 	response.id
 	response.posts_count // Number of messages, including the first one
 	response.created_at
