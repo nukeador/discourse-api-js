@@ -11,15 +11,15 @@ client.category(category, function(response) {
                     <p>Number of topics retrieved: ' + response.topic_list.topics.length + '</p>\
                     <p>List of topics:</p>\
                     <ul>';
-      
-      for (var i = 0; i < response.topic_list.topics.length; i++) {
+
+    for (var i = 0; i < response.topic_list.topics.length; i++) {
         var topic = response.topic_list.topics[i];
         var url = baseURL + '/t/' + topic.slug + '/' + topic.id;
         content += '<li><a href="' + url + '">' + topic.title + '</a> (' + topic.created_at + ') ' + topic.posts_count + ' posts - ' + topic.views + ' views - ' + topic.like_count + ' likes </li>';
-      };
-      
+    };
+
       content += '</ul><hr />';
-      
+
       document.getElementById('content').innerHTML = content;
     }
 });
